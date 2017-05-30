@@ -27,19 +27,24 @@
         <div class="container">
             <div class="row">
                 <div class="col s3 purple lighten-3">
-                    <img id="draggable" class="responsive-img center-align" width="200px" src="flower/carnation.png">
-                    <img id="draggable2" class="responsive-img center-align" width="200px" src="flower/carnation.png">
+                    <img id="carnation" class="flower_item responsive-img_item center-align " width="200px" src="flower/carnation.png">
+                    <img id="daisy" class="flower_item responsive-img center-align" width="200px" src="flower/daisy.png">
                 </div>
                 <div class="container">
-                    <div class="col s6 m6">
-                        <div id="droppable" class="ui-widget-header" >
-                            <p>Drop me here</p>
+                    <div class="col s10">
+                        <div class="row center">
+                            <div class="main" id="content_area"></div>
+                            <div id="trash">
+                                <img src="flower/trash.png">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- the content area -->
+        <!--        <div class="main " id="content_area"></div>-->
 
 
         <div class="parallax-container valign-wrapper">
@@ -52,6 +57,7 @@
             </div>
             <div class="parallax"><img src="images/flo1.jpg" alt="Unsplashed background img 3"></div>
         </div>
+
 
         <footer class="page-footer teal">
             <div class="container">
@@ -121,50 +127,127 @@
         </style>
 
         <script>
+
             $(function () {
-                $("#draggable").draggable({
-                    revert: "invalid",
-                    helper: function (e) {
-                        var original = $(e.target).hasClass("ui-draggable") ? $(e.target) : $(e.target).closest(".ui-draggable");
-                        return original.clone().css({
-                            width: original.width() // or outerWidth*
-                        });
-                    },
-                    stop: function (e, ui) {
-                        $('#drag').draggable().data()["ui-draggable"].cancelHelperRemoval = true;
-                    }
-                });
 
-                $("#draggable2").draggable({
-                    revert: "invalid",
-                    helper: function (e) {
-                        var original = $(e.target).hasClass("ui-draggable") ? $(e.target) : $(e.target).closest(".ui-draggable");
-                        return original.clone().css({
-                            width: original.width() // or outerWidth*
-                        });
-                    },
-                    stop: function (e, ui) {
-                        $('#drag').draggable().data()["ui-draggable"].cancelHelperRemoval = true;
-                    }
-                });
-
-
-
-                $("#droppable").droppable({
-                    tolerance: 'pointer',
-                    classes: {
-                        "ui-droppable-active": "ui-state-active",
-                        "ui-droppable-hover": "ui-state-hover"
-                    },
+                $("#content_area").droppable({
                     drop: function (event, ui) {
-                        $(this)
-                                .addClass("ui-state-highlight")
-                                .find("p")
-                                .html("Dropped!");
+                        //this if condition is for avoiding multiple time drop and attachment of same item
+                        if (ui.draggable.hasClass("flower_item")) {
+                            var $item = $(ui.helper).clone(); //getting the cloned item
+                            rel = $item.attr('rel');
+                            $item.removeClass("flower_item");
+//                            if (rel == "a") {
+//                                $item.html("<div id='e1' class='drag_elm'>Item 1</div>");
+//                            } else if (rel == "b") {
+//                                $item.html("<div id='e2' class='drag_elm'>Item 2</div>");
+//                            } else if (rel == "c") {
+//                                $item.html("<div id='e3' class='drag_elm'>Item 3</div>");
+//                            }
+                            $(this).append($item);
+                            makeDraggable($item);
+                        }
                     }
-                });
+                })
+
+                function makeDraggable($item) {
+                    $item.draggable({
+//                        containment: "parent",
+                        revert: "invalid",
+//                        appendTo: "#content_area",
+                        start: function () {},
+                        stop: function () {
+                            console.log('stopped')
+                        }
+                    });
+                }
+
+                $(".flower_item").draggable({
+                    helper: "clone",
+                    revert: "invalid",
+                    start: function () {},
+                    stop: function () {
+                        console.log('stopped')
+                    }
+                })
+
             });
 
+
+            $('#trash').droppable({
+                drop: function (event, ui) {
+                    $(ui.helper).remove();
+                }
+            });
+
+
+
+
+
+//            separacion
+
+//            $(function () {
+//                $("#draggable").draggable({
+//                    revert: "invalid",
+//                    helper: 'clone'
+//                });
+//            });
+//
+//            $("#draggable2").draggable({
+//                revert: "invalid",
+//                helper: function (e) {
+//                    var original = $(e.target).hasClass("ui-draggable") ? $(e.target) : $(e.target).closest(".ui-draggable");
+//                    return original.clone().css({
+//                        width: original.width() // or outerWidth*
+//                    });
+//                },
+//                stop: function (e, ui) {
+//                    $('#drag').draggable().data()["ui-draggable"].cancelHelperRemoval = true;
+//                }
+//            });
+//
+//
+//
+//            $("#droppable").droppable({
+//                tolerance: 'pointer',
+//                classes: {
+//                    "ui-droppable-active": "ui-state-active",
+//                    "ui-droppable-hover": "ui-state-hover"
+//                },
+//                drop: function (event, ui) {
+//                    $(this)
+//                            .addClass("ui-state-highlight")
+//                            .find("p")
+//                            .html("Dropped!");
+//                    var newClone = $(ui.helper).clone().draggable();
+//                    $(this).after(newClone);
+//
+//                }
+//            });
         </script>  
+
+        <style>
+            .drag_elm {
+                width: 80px;
+                height: 80px;
+                background: aqua;
+                border: 1px solid red;
+            }
+
+            .snippet_item {
+                display: block;
+                padding: 5px;
+                margin-bottom: 5px;
+                width: 200px;
+            }
+
+            .main {
+                width: 100%;
+                margin: 0 auto;
+                border: 1px solid blue;
+                height: 380px;
+            }
+
+        </style>
     </body>
 </html>
