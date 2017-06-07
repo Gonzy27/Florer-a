@@ -26,20 +26,28 @@
 
         <div class="container">
             <div class="row">
-                <div class="col s3 purple lighten-3">
-                    <img id="carnation" class="flower_item responsive-img_item center-align " width="200px" src="flower/carnation.png">
-                    <img id="daisy" class="flower_item responsive-img center-align" width="200px" src="flower/daisy.png">
+                <div class="col-xs-6 col-md-4 border" id="flores">
+                    <img id="carnation" class="flower_item img-responsive center-block" width="230px" src="flower/carnation.png">
+                    <p class="text-center">Clavel</p>
+                    <img id="daisy" class="flower_item img-responsive center-block" width="250px" src="flower/daisy.png">
+                    <p class="text-center">Margarita</P>
+                    <img id="apple" class="flower_item img-responsive center-block" width="250px" src="flower/apple blossom.png">
+                    <p class="text-center">Flor de Manzana</P>
+                    <img id="rose" class="flower_item img-responsive center-block" width="250px" src="flower/rose.png">
+                    <p class="text-center">Rosa</P>
+                    <img id="tulip" class="flower_item img-responsive center-block" width="250px" src="flower/tulip.png">
+                    <p class="text-center">Tulipán</P>
+                    <img id="yellowRose" class="flower_item img-responsive center-block" width="220px" src="flower/daliaR.png">
+                    <p class="text-center">Dalia Roja</P>  
+                    <img id="yellowRose" class="flower_item img-responsive center-block" width="220px" src="flower/daliaY.png">
+                    <p class="text-center">Dalia Amarilla</P> 
                 </div>
-                <div class="container">
-                    <div class="col s10">
-                        <div class="row center">
-                            <div class="main" id="content_area"></div>
-                            <div id="trash">
-                                <img src="flower/trash.png">
-                            </div>
-                        </div>
-                    </div>
+                <div class="conteiner">
+                    <div class="main" id="content_area"></div>
                 </div>
+            </div>
+            <div class="col-xs-6 col-md-4" id="trash">
+                <img src="flower/trash.png">
             </div>
         </div>
 
@@ -99,12 +107,14 @@
         <!--  CSS-->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
         <!--  Scripts-->
         <script src="js/jquery-3.2.1.min.js"></script>
         <script src="js/materialize.js"></script>
+        <script src="js/bootstrap.min.js"></script>
         <script src="js/init.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <style>
@@ -152,9 +162,9 @@
 
                 function makeDraggable($item) {
                     $item.draggable({
-//                        containment: "parent",
+//                      containment: "parent",
                         revert: "invalid",
-//                        appendTo: "#content_area",
+//                      appendTo: "#content_area",
                         start: function () {},
                         stop: function () {
                             console.log('stopped')
@@ -165,6 +175,7 @@
                 $(".flower_item").draggable({
                     helper: "clone",
                     revert: "invalid",
+                    appendTo: "#content_area",
                     start: function () {},
                     stop: function () {
                         console.log('stopped')
@@ -179,8 +190,6 @@
                     $(ui.helper).remove();
                 }
             });
-
-
 
 
 
@@ -242,12 +251,27 @@
             }
 
             .main {
-                width: 100%;
+                width: 70%;
                 margin: 0 auto;
-                border: 1px solid blue;
-                height: 380px;
+                border: 2px solid black;
+                height: 500px;
+                margin-left: 385px;
             }
 
+
+            .ui-draggable-dragging {
+                z-index: 10000!important
+            }
+            .flower_item {
+                z-index: 10000000
+            }
+
+            #flores {
+                outline: 2px solid black;
+                height: 500px;
+                overflow-y: scroll;
+                /*                overflow-x: hidden;*/
+            }
         </style>
     </body>
 </html>
