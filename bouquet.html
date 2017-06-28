@@ -41,14 +41,19 @@
                     <p class="text-center">Dalia Roja</P>  
                     <img id="yellowRose" class="flower_item img-responsive center-block" width="220px" src="flower/daliaY.png">
                     <p class="text-center">Dalia Amarilla</P> 
-                    <img id="mostrar1" class="flower_vase ui-widget-content img-responsive center-block" width="220px" src="flower vase/flower-vase-1.jpg">
+                    <img id="florero1" class="flower_vase ui-widget-content img-responsive center-block" width="220px" src="flowerVase/vase1.jpg">
                     <p class="text-center">Florero 1</P> 
-                    <img id="mostrar2" class="flower_vase ui-widget-content img-responsive center-block" width="220px" src="flower vase/flower-vase-2.jpg">
+                    <img id="florero2" class="flower_vase ui-widget-content img-responsive center-block" width="220px" src="flowerVase/vase2.jpg">
                     <p class="text-center">Florero 2</P> 
+                    <img id="florero3" class="flower_vase ui-widget-content img-responsive center-block" width="220px" src="flowerVase/vase3.jpg">
+                    <p class="text-center">Florero 3</P> 
+                    <img id="florero4" class="flower_vase ui-widget-content img-responsive center-block" width="220px" src="flowerVase/vase4.jpg">
+                    <p class="text-center">Florero 4</P> 
                 </div>
                 <div class="conteiner">
                     <div class="main" id="content_area"></div>
                 </div>
+                <img id="florero" src="flowerVase/vase1.jpg" width="20%"/>
             </div>
             <div class="col-xs-6 col-md-4" id="trash">
                 <img src="flower/trash.png">
@@ -195,15 +200,30 @@
                 }
             });
 
-            $("#mostrar1").click(function () {
-                $("florero1").show();
-                $("florero2").hide();
+            $('#florero1').on({
+                'click': function () {
+                    $('#florero').attr('src', 'flowerVase/vase1.jpg');
+                }
             });
 
-            $("#mostrar2").click(function () {
-                $("florero2").show();
-                $("florero1").hide();
+            $('#florero2').on({
+                'click': function () {
+                    $('#florero').attr('src', 'flowerVase/vase2.jpg');
+                }
             });
+
+            $('#florero3').on({
+                'click': function () {
+                    $('#florero').attr('src', 'flowerVase/vase3.jpg');
+                }
+            });
+
+            $('#florero4').on({
+                'click': function () {
+                    $('#florero').attr('src', 'flowerVase/vase4.jpg');
+                }
+            });
+            
 
 
 //            separacion
@@ -286,8 +306,12 @@
                 /*                overflow-x: hidden;*/
             }
 
-            .flower_vase .ui-selecting { background: #FECA40; }
-            .flower_vase .ui-selected { background: #F39814; color: white; }
+            #florero {
+                position: absolute;
+                margin-left: 650px;
+                top: 250px;
+                z-index: -1;
+            }
         </style>
     </body>
 </html>
