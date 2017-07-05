@@ -27,28 +27,34 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-6 col-md-4 border" id="flores">
-                    <img id="carnation" class="flower_item img-responsive center-block" width="230px" src="flower/carnation.png">
-                    <p class="text-center">Clavel</p>
-                    <img id="daisy" class="flower_item img-responsive center-block" width="250px" src="flower/daisy.png">
-                    <p class="text-center">Margarita</P>
-                    <img id="apple" class="flower_item img-responsive center-block" width="250px" src="flower/apple blossom.png">
-                    <p class="text-center">Flor de Manzana</P>
-                    <img id="rose" class="flower_item img-responsive center-block" width="250px" src="flower/rose.png">
-                    <p class="text-center">Rosa</P>
-                    <img id="tulip" class="flower_item img-responsive center-block" width="250px" src="flower/tulip.png">
-                    <p class="text-center">Tulipán</P>
-                    <img id="yellowRose" class="flower_item img-responsive center-block" width="220px" src="flower/daliaR.png">
-                    <p class="text-center">Dalia Roja</P>  
-                    <img id="yellowRose" class="flower_item img-responsive center-block" width="220px" src="flower/daliaY.png">
-                    <p class="text-center">Dalia Amarilla</P> 
-                    <img id="florero1" class="flower_vase ui-widget-content img-responsive center-block" width="220px" src="flowerVase/vase1.jpg">
-                    <p class="text-center">Florero 1</P> 
-                    <img id="florero2" class="flower_vase ui-widget-content img-responsive center-block" width="220px" src="flowerVase/vase2.jpg">
-                    <p class="text-center">Florero 2</P> 
-                    <img id="florero3" class="flower_vase ui-widget-content img-responsive center-block" width="220px" src="flowerVase/vase3.jpg">
-                    <p class="text-center">Florero 3</P> 
-                    <img id="florero4" class="flower_vase ui-widget-content img-responsive center-block" width="220px" src="flowerVase/vase4.jpg">
-                    <p class="text-center">Florero 4</P> 
+                    <button class="accordion">Flores</button>
+                    <div class="panel">
+                        <img id="carnation" class="flower_item img-responsive center-block" width="230px" src="flower/carnation.png">
+                        <p class="text-center">Clavel</p>
+                        <img id="daisy" class="flower_item img-responsive center-block" width="250px" src="flower/daisy.png">
+                        <p class="text-center">Margarita</P>
+                        <img id="apple" class="flower_item img-responsive center-block" width="250px" src="flower/apple blossom.png">
+                        <p class="text-center">Flor de Manzana</P>
+                        <img id="rose" class="flower_item img-responsive center-block" width="250px" src="flower/rose.png">
+                        <p class="text-center">Rosa</P>
+                        <img id="tulip" class="flower_item img-responsive center-block" width="250px" src="flower/tulip.png">
+                        <p class="text-center">Tulipán</P>
+                        <img id="yellowRose" class="flower_item img-responsive center-block" width="220px" src="flower/daliaR.png">
+                        <p class="text-center">Dalia Roja</P>  
+                        <img id="yellowRose" class="flower_item img-responsive center-block" width="220px" src="flower/daliaY.png">
+                        <p class="text-center">Dalia Amarilla</P> 
+                    </div>
+                    <button class="accordion">Floreros</button>
+                    <div class="panel">
+                        <img id="florero1" class="flower_vase ui-widget-content img-responsive center-block" width="220px" src="flowerVase/vase1.jpg">
+                        <p class="text-center">Florero 1</P> 
+                        <img id="florero2" class="flower_vase ui-widget-content img-responsive center-block" width="220px" src="flowerVase/vase2.jpg">
+                        <p class="text-center">Florero 2</P>
+                        <img id="florero3" class="flower_vase ui-widget-content img-responsive center-block" width="220px" src="flowerVase/vase3.jpg">
+                        <p class="text-center">Florero 3</P> 
+                        <img id="florero4" class="flower_vase ui-widget-content img-responsive center-block" width="220px" src="flowerVase/vase4.jpg">
+                        <p class="text-center">Florero 4</P> 
+                    </div>
                 </div>
                 <div class="conteiner">
                     <div class="main" id="content_area"></div>
@@ -62,7 +68,6 @@
 
         <!-- the content area -->
         <!--        <div class="main " id="content_area"></div>-->
-
 
         <div class="parallax-container valign-wrapper">
             <div class="section no-pad-bot">
@@ -143,9 +148,48 @@
             .content{
 
             }
+
+            button.accordion {
+                background-color: #eee;
+                color: #444;
+                cursor: pointer;
+                padding: 18px;
+                width: 100%;
+                border: none;
+                text-align: left;
+                outline: none;
+                font-size: 15px;
+                transition: 0.4s;
+            }
+
+            button.accordion.active, button.accordion:hover {
+                background-color: #ddd;
+            }
+
+            div.panel {
+                padding: 0 18px;
+                background-color: white;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.2s ease-out;
+            }
         </style>
 
         <script>
+            var acc = document.getElementsByClassName("accordion");
+            var i;
+
+            for (i = 0; i < acc.length; i++) {
+                acc[i].onclick = function () {
+                    this.classList.toggle("active");
+                    var panel = this.nextElementSibling;
+                    if (panel.style.maxHeight) {
+                        panel.style.maxHeight = null;
+                    } else {
+                        panel.style.maxHeight = panel.scrollHeight + "px";
+                    }
+                }
+            }
 
             $(function () {
 
@@ -156,13 +200,13 @@
                             var $item = $(ui.helper).clone(); //getting the cloned item
                             rel = $item.attr('rel');
                             $item.removeClass("flower_item");
-//                            if (rel == "a") {
-//                                $item.html("<div id='e1' class='drag_elm'>Item 1</div>");
-//                            } else if (rel == "b") {
-//                                $item.html("<div id='e2' class='drag_elm'>Item 2</div>");
-//                            } else if (rel == "c") {
-//                                $item.html("<div id='e3' class='drag_elm'>Item 3</div>");
-//                            }
+                            //                            if (rel == "a") {
+                            //                                $item.html("<div id='e1' class='drag_elm'>Item 1</div>");
+                            //                            } else if (rel == "b") {
+                            //                                $item.html("<div id='e2' class='drag_elm'>Item 2</div>");
+                            //                            } else if (rel == "c") {
+                            //                                $item.html("<div id='e3' class='drag_elm'>Item 3</div>");
+                            //                            }
                             $(this).append($item);
                             makeDraggable($item);
                         }
@@ -171,9 +215,9 @@
 
                 function makeDraggable($item) {
                     $item.draggable({
-//                      containment: "parent",
+                        //                      containment: "parent",
                         revert: "invalid",
-//                      appendTo: "#content_area",
+                        //                      appendTo: "#content_area",
                         start: function () {},
                         stop: function () {
                             console.log('stopped')
@@ -190,7 +234,6 @@
                         console.log('stopped')
                     }
                 })
-
             });
 
 
@@ -223,49 +266,47 @@
                     $('#florero').attr('src', 'flowerVase/vase4.jpg');
                 }
             });
-            
 
+            //            separacion
 
-//            separacion
-
-//            $(function () {
-//                $("#draggable").draggable({
-//                    revert: "invalid",
-//                    helper: 'clone'
-//                });
-//            });
-//
-//            $("#draggable2").draggable({
-//                revert: "invalid",
-//                helper: function (e) {
-//                    var original = $(e.target).hasClass("ui-draggable") ? $(e.target) : $(e.target).closest(".ui-draggable");
-//                    return original.clone().css({
-//                        width: original.width() // or outerWidth*
-//                    });
-//                },
-//                stop: function (e, ui) {
-//                    $('#drag').draggable().data()["ui-draggable"].cancelHelperRemoval = true;
-//                }
-//            });
-//
-//
-//
-//            $("#droppable").droppable({
-//                tolerance: 'pointer',
-//                classes: {
-//                    "ui-droppable-active": "ui-state-active",
-//                    "ui-droppable-hover": "ui-state-hover"
-//                },
-//                drop: function (event, ui) {
-//                    $(this)
-//                            .addClass("ui-state-highlight")
-//                            .find("p")
-//                            .html("Dropped!");
-//                    var newClone = $(ui.helper).clone().draggable();
-//                    $(this).after(newClone);
-//
-//                }
-//            });
+            //            $(function () {
+            //                $("#draggable").draggable({
+            //                    revert: "invalid",
+            //                    helper: 'clone'
+            //                });
+            //            });
+            //
+            //            $("#draggable2").draggable({
+            //                revert: "invalid",
+            //                helper: function (e) {
+            //                    var original = $(e.target).hasClass("ui-draggable") ? $(e.target) : $(e.target).closest(".ui-draggable");
+            //                    return original.clone().css({
+            //                        width: original.width() // or outerWidth*
+            //                    });
+            //                },
+            //                stop: function (e, ui) {
+            //                    $('#drag').draggable().data()["ui-draggable"].cancelHelperRemoval = true;
+            //                }
+            //            });
+            //
+            //
+            //
+            //            $("#droppable").droppable({
+            //                tolerance: 'pointer',
+            //                classes: {
+            //                    "ui-droppable-active": "ui-state-active",
+            //                    "ui-droppable-hover": "ui-state-hover"
+            //                },
+            //                drop: function (event, ui) {
+            //                    $(this)
+            //                            .addClass("ui-state-highlight")
+            //                            .find("p")
+            //                            .html("Dropped!");
+            //                    var newClone = $(ui.helper).clone().draggable();
+            //                    $(this).after(newClone);
+            //
+            //                }
+            //            });
         </script>  
 
         <style>
